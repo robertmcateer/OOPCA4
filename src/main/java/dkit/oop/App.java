@@ -18,6 +18,15 @@ public class App
 
     private void start() {
 
+//        Student s1 = new Student(12345,"04/03/2000","killeavy2","r@r.com");
+//        System.out.println(s1);
+//        Student s2 = new Student(s1);
+//        System.out.println();
+//        System.out.println(s1);
+//        System.out.println(s2);
+
+
+
         // load students
         StudentManager studentManager = new StudentManager();
 
@@ -46,6 +55,18 @@ public class App
 
 
         //mgr.saveToFile();
+
+        //        get getstudent
+
+//        Student s3 = new Student(studentManager.getStudent(12345));
+//        System.out.println(s3);
+//        Course c3 = new Course("DK556","8"," BSC in Computing in Games Development","DKIT");
+//        courseManager.addCourse(c3);
+//        courseManager.getCourse("DK555");
+        courseManager.getAllCourses();
+
+
+
 
     }
 }

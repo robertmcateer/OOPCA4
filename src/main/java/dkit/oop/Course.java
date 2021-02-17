@@ -7,11 +7,13 @@ public class Course {
     private String title;      // e.g. BSc in Computing in Software Development
     private String institution; // Dundalk Institute of Technology
 
-    // Copy Constructor
-    // Accepts a Course object as an argument and copies all the field values
-    // into a new Course object. Returns the new cloned object.
-    // (add here)
-
+    //copy constructor
+    public Course (Course course){
+        this.courseId = course.courseId;
+        this.level = course.level;
+        this.title = course.title;
+        this.institution = course.institution;
+    }
 
 
     // Constructor
