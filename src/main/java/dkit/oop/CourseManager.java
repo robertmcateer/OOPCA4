@@ -23,6 +23,9 @@ public class CourseManager {
     public CourseManager() {
         Course c1 = new Course("DK821","8"," BSC in Computing in Software Developemt","DKIT");
         Course c2 = new Course("DK555","8"," BSC in Computing in Games Development","DKIT");
+        Course c4 = new Course("DKIT1900","8","Business Management","dkit");
+        Course c5 = new Course("DKIT1700","7","Business and Finance","dkit");
+        Course c6 = new Course("DKIT1980","8","Nursing","dkit");
 
         this.courseMap = new HashMap<>();
         courseMap.put(c1.getCourseId(),c1);
@@ -63,7 +66,7 @@ public void addCourse(Course c) {
 
 
     Course copy = new Course(c);
-    if (copy != null)
+    if (copy == null)
         throw new IllegalArgumentException();
     courseMap.put(copy.getCourseId(),copy);
 

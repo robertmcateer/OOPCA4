@@ -40,7 +40,7 @@ private Map<Integer,Student> studentMap;
     public void addStudent(Student s) {
 
         Student copy = new Student(s);
-        if (copy != null)
+        if (copy == null)
             throw new IllegalArgumentException();
         studentMap.put(copy.getCaoNumber(),copy);
 
@@ -52,6 +52,16 @@ private Map<Integer,Student> studentMap;
         studentMap.remove(caoNumber);
     }
 
-//    public isRegistered( int caoNumber)
-//        students.isValid()
+    public boolean isRegistered(int caoNumber){
+
+        boolean isreg = false;
+
+        if(studentMap.containsKey(caoNumber)){
+            isreg = true;
+
+        }
+
+        return isreg;
+    }
+
 }

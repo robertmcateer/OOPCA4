@@ -1,6 +1,7 @@
 package dkit.oop;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -18,52 +19,92 @@ public class App
 
     private void start() {
 
-//        Student s1 = new Student(12345,"04/03/2000","killeavy2","r@r.com");
-//        System.out.println(s1);
-//        Student s2 = new Student(s1);
-//        System.out.println();
-//        System.out.println(s1);
-//        System.out.println(s2);
-
-
-
         // load students
         StudentManager studentManager = new StudentManager();
 
         // load courses
         CourseManager courseManager= new CourseManager();
 
-        // load manager to provide functionality to allow a student
-        // to login and add/update their course selections
-        // This CourseChoicesManager component depends on the
-        // StudentManager and the CourseManager,
-        // so we 'inject' or pass-in these objects.
-        //
-        CourseChoicesManager mgr = new CourseChoicesManager(studentManager, courseManager);
+        CourseChoicesManager mgr = new CourseChoicesManager(studentManager,courseManager);
 
-        // display a menu to do things
-        // manual testing of mgr public interface
-
-//        if ( mgr.login(22224444, "xxxx","bbbb") )
-//        {
-//            Student student = mgr.getStudentDetails(22224444);
-//
-//            System.out.println("Student: " + student);
-//        }
-//        else
-//            System.out.println("Not logged in - try again");
+        studentmenu(mgr);
 
 
-        //mgr.saveToFile();
 
-        //        get getstudent
 
-//        Student s3 = new Student(studentManager.getStudent(12345));
-//        System.out.println(s3);
-//        Course c3 = new Course("DK556","8"," BSC in Computing in Games Development","DKIT");
-//        courseManager.addCourse(c3);
-//        courseManager.getCourse("DK555");
-        courseManager.getAllCourses();
+
+
+    }
+
+
+
+
+    public void studentmenu(CourseChoicesManager mgr){
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("** Student Menu **");
+        System.out.println();
+        System.out.println("** Student Login **");
+        System.out.println();
+        System.out.println("Enter in CAO Number ->");
+        int caonumber = sc.nextInt();
+        System.out.println("Enter Date Of Birth->");
+        String DOB = sc.next();
+        System.out.println("Enter Password ->");
+        String password = sc.next();
+        System.out.println("Enter Email ->");
+        String email = sc.next();
+
+
+        if (mgr.login(caonumber,DOB,password)!=true){
+            System.out.println("Login Details incorrect: Try again.");
+        }
+        else{
+            System.out.println("Welcome Student "+caonumber);
+
+            boolean menu = false;
+            while(menu)
+            {
+                System.out.println();
+                System.out.println("1. Display a course ");
+                System.out.println("2. Display all courses ");
+                System.out.println("3. Display Current Choice");
+                System.out.println("4. Update Choices");
+                System.out.println("5. Logout ");
+
+                System.out.println("Choose an option");
+                System.out.print(": ");
+
+                int choice = sc.nextInt();
+
+                switch (choice)
+                {
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+
+                    case 3:
+
+                        break;
+                    case 4:
+                        ;
+                        break;
+                    case 5:
+                        System.out.println("logout");
+                        menu = false;
+                        break;
+                }
+            }
+
+        }
+
+
+
+
+
 
 
 
