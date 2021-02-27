@@ -1,5 +1,5 @@
 package dkit.oop;
-
+//RobertMcateer D00233414
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,10 +23,10 @@ public class App {
         // load students
         StudentManager studentManager = new StudentManager();
 
-
         // load courses
         CourseManager courseManager = new CourseManager();
 
+        // load choicesmanager
         CourseChoicesManager mgr = new CourseChoicesManager(studentManager, courseManager);
 
         startupmenu(mgr);
@@ -46,7 +46,6 @@ public class App {
             System.out.println("1. Student Login");
             System.out.println("2. ADMIN ");
             System.out.println("3. Exit");
-
 
             System.out.println("Choose an option");
             System.out.print(": ");
@@ -69,6 +68,7 @@ public class App {
         }
     }
 
+
     public void menu1(CourseChoicesManager mgr) {
 
         Scanner sc = new Scanner(System.in);
@@ -89,9 +89,9 @@ public class App {
             System.out.println("Enter Password ->");
             String password = sc.next();
 
-            if (mgr.login(caonumber, DOB, password)) {
+            if (mgr.login(caonumber, DOB, password))
+            {
                 loggedin = true;
-
 
             }
         }
@@ -154,7 +154,6 @@ public class App {
                                     val = true;
                                 }
                             }
-
 
                         }
                         mgr.updateChoices(caonumber, updatechoice);
@@ -259,8 +258,8 @@ public class App {
 
                                 input = true;
                             }
-
                         }
+
                         input = false;
                         while(!input){
                             System.out.println("Enter in Password");
@@ -270,15 +269,12 @@ public class App {
 
                                 input = true;
                             }
-
                         }
 
                         System.out.println("Enter in Email Address");
                         email = sc.next();
                         Student s = new Student(cao,DOB,password,email);
                         mgr.addstudent(s);
-
-
                         break;
                     case 6:
                         System.out.println("6. Remove Student ");
@@ -313,15 +309,11 @@ public class App {
 
     public static boolean isValidCao(int cao)
     {
-
         String regex = "[0-9]{5}";
-
-
         // Compile the ReGex
         Pattern p = Pattern.compile(regex);
         String cao1 = ""+cao;
         Matcher m = p.matcher(cao1);
-
 
         return m.matches();
     }
@@ -330,13 +322,10 @@ public class App {
     {
 
         String regex = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))";
-
-
         // Compile the ReGex
         Pattern p = Pattern.compile(regex);
 
         Matcher m = p.matcher(DOB);
-
 
         return m.matches();
     }
@@ -345,23 +334,13 @@ public class App {
 
         String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$";
 
-
         // Compile the ReGex
         Pattern p = Pattern.compile(regex);
-
         Matcher m = p.matcher(password);
 
 
         return m.matches();
     }
-
-
-
-
-
-
-
-
 
 
     }

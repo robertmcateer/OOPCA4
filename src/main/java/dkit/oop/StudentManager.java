@@ -1,12 +1,12 @@
 package dkit.oop;
-// StudentManager encapsulates the storage and ability
-// to manipulate student objects
+//RobertMcateer D00233414
 
 import java.io.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+
 
 public class StudentManager {
 
@@ -18,12 +18,14 @@ public class StudentManager {
         loadStudents();
 
 
-
-
-
     }
-//    code get student and test in app
 
+    /**
+     * returns a copy of a student record if there is a matching cao number within the map.
+     * Null returned other wise
+     * @param caoNumber
+     * @return
+     */
     public Student getStudent(int caoNumber) {
 
         if(this.studentMap.containsKey(caoNumber)){
@@ -34,6 +36,11 @@ public class StudentManager {
         return null;
     }
 
+    /**
+     * adds a copy instance of a student to the student map.
+     *
+     * @param s
+     */
     public void addStudent(Student s) {
 
         Student copy = new Student(s);
@@ -42,7 +49,10 @@ public class StudentManager {
         studentMap.put(copy.getCaoNumber(), copy);
     }
 
-
+    /**
+     * Removes a student record from studentmap if the caonumber passes in matches one in the map
+     * @param caoNumber
+     */
     public void removeStudent(int caoNumber) {
 
         if(this.studentMap.containsKey(caoNumber)){
@@ -53,6 +63,13 @@ public class StudentManager {
         }
     }
 
+    /**
+     * Method checks for a instance of a student in the studentmap.
+     * If one is found then the student is registered and true is returned.
+     *
+     * @param caoNumber
+     * @return
+     */
     public boolean isRegistered(int caoNumber) {
 
         boolean isreg = false;
@@ -63,7 +80,9 @@ public class StudentManager {
         return isreg;
     }
 
-
+    /**
+     * method loads in student details from student.txt file
+     */
     public void loadStudents() {
 
         try (Scanner sc = new Scanner(new File("students.txt"));) {
@@ -93,6 +112,9 @@ public class StudentManager {
 
     }
 
+    /**
+     * New records or deletion of student records are saved and written to students.txt using this method
+     */
     public void wrtieout(){
 
         try(BufferedWriter studentfile = new BufferedWriter(new FileWriter("students.txt"))){

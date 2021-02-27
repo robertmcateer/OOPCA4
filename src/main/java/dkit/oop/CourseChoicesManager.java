@@ -1,5 +1,7 @@
 package dkit.oop;
 
+//RobertMcateer D00233414
+
 // Stores all student CAO choices.
 // Allows student to make course choices, save them and update them later.
 //
@@ -62,7 +64,12 @@ public class CourseChoicesManager {
 
     }
 
-
+    /**
+     * returns a list of course choices that have been loaded into the system by the load method.
+     *
+     * @param caonumber
+     * @return
+     */
 
     public List<Course> getStudentChoices(int caonumber) {
 
@@ -78,6 +85,13 @@ public class CourseChoicesManager {
         return courselist;
 
     }
+
+    /**
+     * this method alter student course choices and writes them to the choices txt file once
+     * they have been updated
+     * @param caonumber
+     * @param courseIDs
+     */
 
     public void updateChoices(int caonumber,List<String> courseIDs ) {
 
@@ -111,6 +125,10 @@ public class CourseChoicesManager {
 
     }
 
+    /**
+     * this method is used to call the add student method from the student manager
+     * @param student
+     */
     public void addstudent (Student student){
 
         if (student != null){
@@ -120,10 +138,18 @@ public class CourseChoicesManager {
             System.out.println("invalid input");
         }
     }
+
+    /**
+     * this method calls the remove student from the student manager class to be used in main app
+     * @param caonum
+     */
     public void removeStudent (int caonum) {
         studentManager.removeStudent(caonum);
     }
-
+    /**
+     * this method calls the get student from the student manager class to be used in main app
+     * @param caonum
+     */
     public Student getStudent (int caonum) {
 
         Student copy = null;
@@ -135,7 +161,11 @@ public class CourseChoicesManager {
         return copy;
 
     }
-
+    /**
+     * this method calls the get course from the course manager class to be used in main app.
+     * checking if the return is null or valid
+     * @param courseid
+     */
     public Course getCourse (String courseid) {
         Course copy = null;
         Course course = courseManager.getCourse(courseid);
@@ -145,6 +175,11 @@ public class CourseChoicesManager {
         }
         return copy;
     }
+    /**
+     * this method calls the add course from the course manager class to be used in main app.
+     * checking if the return is null or valid
+     * @param course
+     */
 
     public void addCourse (Course course){
 
@@ -155,12 +190,19 @@ public class CourseChoicesManager {
             System.out.println("invalid input");
         }
     }
-
+    /**
+     * this method calls the remove course from the course manager class to be used in main app.
+     *
+     * @param courseid
+     */
     public void removeCourse(String courseid) {
         courseManager.removeCourse(courseid);
     }
 
-
+    /**
+     * method is used to load in all student choices information from choices txt file to
+     * be displayed or altered in the main app
+     */
     public void loadchoices() {
 
         try (Scanner sc = new Scanner(new File("choices.txt"));) {
@@ -188,6 +230,9 @@ public class CourseChoicesManager {
         }
     }
 
+    /**
+     * this methods writes any changed that have been made to a students course choice back to the choice txt file
+     */
     public void wrtieout(){
 
         try(BufferedWriter choicesfile = new BufferedWriter(new FileWriter("choices.txt"))){
@@ -207,6 +252,10 @@ public class CourseChoicesManager {
         }
     }
 
+    /**
+     * saveall method is used to call both writeout methodds from student and course manager classes
+     * this ensures all information alter by admin or student user is saved for future use.
+     */
     public void saveall(){
         studentManager.wrtieout();
         courseManager.wrtieout();

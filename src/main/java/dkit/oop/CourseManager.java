@@ -1,5 +1,5 @@
 package dkit.oop;
-
+//RobertMcateer D00233414
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,6 +28,12 @@ public class CourseManager {
 
     }
 
+    /**
+     * copy instance of a course is returned to the system through this method only if the
+     * id entered matches one in the map.
+     * @param courseID
+     * @return
+     */
     public Course getCourse(String courseID) {
 
         if (this.courseMap.containsKey(courseID)){
@@ -38,7 +44,10 @@ public class CourseManager {
         return null;
     }
 
-
+    /**
+     * returns list of all courses in the system back to the main app
+     * @return
+     */
     public ArrayList<Course> getAllCourses() {
 
         ArrayList<Course> courses = new ArrayList<>();
@@ -55,7 +64,11 @@ public class CourseManager {
         return courses;
     }
 
-public void addCourse(Course c) {
+    /**
+     * this method creates a copy of a new course instance
+     * @param c
+     */
+    public void addCourse(Course c) {
 
 
     Course copy = new Course(c);
@@ -65,6 +78,11 @@ public void addCourse(Course c) {
 
 }
 
+    /**
+     * If a course matches the id input it is then removed from the course map.
+     *
+     * @param courseId
+     */
     public void removeCourse(String courseId) {
 
         if (this.courseMap.containsKey(courseId)){
@@ -76,6 +94,9 @@ public void addCourse(Course c) {
 
     }
 
+    /**
+     * method to load in all course data from courses.txt file
+     */
     public void loadcources() {
 
         try (Scanner sc = new Scanner(new File("courses.txt"));) {
@@ -105,7 +126,9 @@ public void addCourse(Course c) {
     }
 
 
-
+    /**
+     * this method writes back to the txt file once changes has been made to course data by the user
+     */
     public void wrtieout(){
 
         try(BufferedWriter coursefile = new BufferedWriter(new FileWriter("courses.txt"))){

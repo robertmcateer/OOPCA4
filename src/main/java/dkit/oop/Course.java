@@ -1,4 +1,5 @@
 package dkit.oop;
+//RobertMcateer D00233414
 
 public class Course {
 
@@ -23,7 +24,6 @@ public class Course {
         this.title = title;
         this.institution = institution;
     }
-
 
 
     public String getCourseId() {
@@ -53,7 +53,7 @@ public class Course {
                 "courseId='" + courseId + '\'' +
                 ", level='" + level + '\'' +
                 ", Title='" + title + '\'' +
-                ", institution='" + institution + '\'' +
+                ", Institution='" + institution + '\'' +
                 '}'+'\n';
     }
 }

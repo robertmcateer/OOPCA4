@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Unit test for simple App.
  */
@@ -41,7 +44,9 @@ public class AppTest
         Student s1 = new Student(34567,"10/04/1999","killeavy","i@i.com");
 
         mgr.addstudent(s1);
-        mgr.getStudent(s1.getCaoNumber());
+        System.out.println(mgr.getStudent(s1.getCaoNumber()));
+
+        // student added to the map
 
     }
     @Test
@@ -51,7 +56,44 @@ public class AppTest
         mgr.addstudent(s1);
         mgr.getStudent(s1.getCaoNumber());
         mgr.removeStudent(s1.getCaoNumber());
-        mgr.getStudent(s1.getCaoNumber());
+        System.out.println(mgr.getStudent(s1.getCaoNumber()));
+
+        //null returned
+
+    }
+    @Test
+    public void addCourse(){
+        Course s1 = new Course("DK109","level 8","computers","DKIT");
+
+        mgr.addCourse(s1);
+        System.out.println(mgr.getAllCourses());
+        // course is added to the map
+
+    }
+    @Test
+    public void removeCourse(){
+        Course s1 = new Course("DK109","level 8","computers","DKIT");
+
+        mgr.addCourse(s1);
+        mgr.getCourse(s1.getCourseId());
+        mgr.removeCourse(s1.getCourseId());
+        System.out.println(mgr.getCourse(s1.getCourseId()));
+        // should be null
+
+    }
+
+    @Test
+    public void updatechoices(){
+        Course c1 = new Course("DK109","level 8","computers","DKIT");
+
+        List<String>update = new ArrayList<>();
+        String course = "DK100";
+        update.add(course);
+
+        mgr.updateChoices(12345,update);
+        System.out.println("here");
+        System.out.println(mgr.getStudentChoices(12345));
+        // choice updated
 
     }
 

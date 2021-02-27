@@ -1,5 +1,5 @@
 package dkit.oop;
-
+//RobertMcateer D00233414
 import java.util.Objects;
 
 public class Student {
@@ -79,10 +79,10 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "caoNumber=" + caoNumber +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
+                "CaoNumber=" + caoNumber +
+                ", DateOfBirth='" + dateOfBirth + '\'' +
+                ", Password='" + password + '\'' +
+                ", Email='" + email + '\'' +
                 '}';
     }
 }
