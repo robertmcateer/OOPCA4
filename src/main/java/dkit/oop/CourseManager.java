@@ -1,7 +1,9 @@
 package dkit.oop;
 
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -19,8 +21,10 @@ public class CourseManager {
 
     private Map<String,Course> courseMap= new HashMap<>();
 
+
     public CourseManager() {
         loadcources();
+
 
     }
 
@@ -66,7 +70,7 @@ public void addCourse(Course c) {
 
     public void loadcources() {
 
-        try (Scanner sc = new Scanner(new File("cources.txt"));) {
+        try (Scanner sc = new Scanner(new File("courses.txt"));) {
             sc.useDelimiter("[,\r\n]+");
             while (sc.hasNext())
             {
@@ -92,9 +96,23 @@ public void addCourse(Course c) {
         }
     }
 
+
+
     public void wrtieout(){
 
+        try(BufferedWriter coursefile = new BufferedWriter(new FileWriter("courses.txt"))){
+           Set<String> keyset = courseMap.keySet();
+            for(String key:keyset){
+                coursefile.write(courseMap.get(key).getCourseId()+","+courseMap.get(key).getLevel()+","+courseMap.get(key).getTitle()+","+courseMap.get(key).getInstitution());
+                coursefile.write("\n");
+            }
+
+
+        } catch (IOException e) {
+            System.out.println("could not save courrse data");
+        }
     }
+
 
 
 }

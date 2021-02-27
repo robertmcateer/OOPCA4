@@ -10,6 +10,10 @@ package dkit.oop;
 //
 // Clone all received and returned objects - encapsulation
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -52,14 +56,8 @@ public class CourseChoicesManager {
 
         List<String> choicelist = new ArrayList<>();
         choicesMap = new HashMap<>();
-        Student s = new Student(studentManager.getStudent(12345));
 
-
-        choicelist.add("DK555");
-        choicelist.add("DK821");
-        choicelist.add("DKIT1980");
-
-        choicesMap.put(s.getCaoNumber(),choicelist);
+        loadchoices();
 
 
     }
@@ -105,6 +103,7 @@ public class CourseChoicesManager {
         if (studentManager.isRegistered(caonumber)){
             choicesMap.put(caonumber,courseIDs);
         }
+        wrtieout();
 
 
     }
@@ -180,9 +179,56 @@ public class CourseChoicesManager {
         courseManager.removeCourse(courseid);
     }
 
-    public void getallCourses()
-    {
-        courseManager.getAllCourses();
+
+    public void loadchoices() {
+
+        try (Scanner sc = new Scanner(new File("choices.txt"));) {
+            sc.useDelimiter("[,\r\n]+");
+            while (sc.hasNext()) {
+
+                String line = sc.nextLine();
+                String [] data = line.split(",");
+
+                int Caonumber = Integer.parseInt(data[0]);
+                List<String> list = new ArrayList<>();
+                for(int i = 1; i < data.length;i++){
+                    list.add(data[i]);
+                }
+                choicesMap.put(Caonumber,list);
+            }
+
+        }
+        catch (IOException e) {
+            System.out.println("IOException thrown in loadStudentsFromFile() "+e.getMessage());
+        }
+        catch (InputMismatchException exception)
+        {
+            System.out.println("InputMismatchexception caught." + exception);
+        }
+    }
+
+    public void wrtieout(){
+
+        try(BufferedWriter choicesfile = new BufferedWriter(new FileWriter("choices.txt"))){
+            Set<Integer> keyset = choicesMap.keySet();
+            for(int key:keyset){
+                choicesfile.write(""+key);
+                List<String> courseid = choicesMap.get(key);
+                for (String course : courseid){
+                    choicesfile.write(","+course);
+                }
+                choicesfile.write("\n");
+            }
+
+
+        } catch (IOException e) {
+            System.out.println("could not save courrse data");
+        }
+    }
+
+    public void saveall(){
+        studentManager.wrtieout();
+        courseManager.wrtieout();
     }
 
 

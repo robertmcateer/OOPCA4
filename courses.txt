@@ -1,0 +1,2 @@
+DK100,Level 8,BSC in Software Development,DKIT
+DK101,Level 7,BSC in GAmes Development,DKIT

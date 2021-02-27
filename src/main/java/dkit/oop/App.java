@@ -153,9 +153,11 @@ public class App {
                         System.out.println("choices Updated");
 
 
+
                         break;
                     case 5:
                         System.out.println("logout");
+                        mgr.saveall();
                         menu = true;
                         break;
                 }
@@ -263,6 +265,7 @@ public class App {
                         break;
                     case 8:
                         System.out.println("Save And Exit");
+                        mgr.saveall();
                         menu = true;
                         break;
                 }

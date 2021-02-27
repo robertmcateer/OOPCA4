@@ -85,6 +85,21 @@ public class StudentManager {
 
     }
 
+    public void wrtieout(){
+
+        try(BufferedWriter studentfile = new BufferedWriter(new FileWriter("students.txt"))){
+            Set<Integer> keyset = studentMap.keySet();
+            for(Integer key:keyset){
+                studentfile.write(studentMap.get(key).getCaoNumber()+","+studentMap.get(key).getDayOfBirth()+","+studentMap.get(key).getPassword()+","+studentMap.get(key).getEmail());
+                studentfile.write("\n");
+            }
+
+
+        } catch (IOException e) {
+            System.out.println("could not save students data");
+        }
+    }
+
 
 
 
