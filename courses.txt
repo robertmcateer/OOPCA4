@@ -1,2 +1,11 @@
-DK100,Level 8,BSC in Software Development,DKIT
-DK101,Level 7,BSC in GAmes Development,DKIT
+DK100,Level 7,BSC in Games Development,DKIT
+DK101,Level 8,BSC in Software Development,DKIT
+DK102,Level 8,BSC in MAths,DKIT
+DK103,Level 7,BSC in English,DKIT
+DK104,Level 8,BSC in Science,DKIT
+DK105,Level 8,BSC in Engineering,DKIT
+DK106,Level 6,BSC in Finance,DKIT
+DK107,Level 8,BSC in Drama,DKIT
+DK108,Level 7,BSC in Computer Science,DKIT
+
+

@@ -9,6 +9,9 @@ import org.junit.Test;
  */
 public class AppTest 
 {
+    StudentManager studentManager = new StudentManager();
+    CourseManager courseManager = new CourseManager();
+    CourseChoicesManager mgr = new CourseChoicesManager(studentManager, courseManager);
     /**
      * Rigorous Test :-)
      */
@@ -32,4 +35,26 @@ public class AppTest
         assert(S1.equals(S2)); // should fail
 
     }
+
+    @Test
+    public void addstudent(){
+        Student s1 = new Student(34567,"10/04/1999","killeavy","i@i.com");
+
+        mgr.addstudent(s1);
+        mgr.getStudent(s1.getCaoNumber());
+
+    }
+    @Test
+    public void removestudent(){
+        Student s1 = new Student(34567,"10/04/1999","killeavy","i@i.com");
+
+        mgr.addstudent(s1);
+        mgr.getStudent(s1.getCaoNumber());
+        mgr.removeStudent(s1.getCaoNumber());
+        mgr.getStudent(s1.getCaoNumber());
+
+    }
+
+
+
 }

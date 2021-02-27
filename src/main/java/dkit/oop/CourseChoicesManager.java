@@ -62,26 +62,7 @@ public class CourseChoicesManager {
 
     }
 
-    public Student getStudentDetails(int caonumber) {
 
-      Student s = new Student(studentManager.getStudent(caonumber));
-
-      if (s != null)
-          return s;
-      else
-          return null;
-
-
-    }
-
-    public Course getCourseDetails(String courseid) {
-        Course c = new Course(courseManager.getCourse(courseid));
-
-        if (c != null)
-            return c;
-        else
-            return null;
-    }
 
     public List<Course> getStudentChoices(int caonumber) {
 
@@ -229,6 +210,7 @@ public class CourseChoicesManager {
     public void saveall(){
         studentManager.wrtieout();
         courseManager.wrtieout();
+
     }
 
 

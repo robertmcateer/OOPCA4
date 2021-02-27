@@ -30,9 +30,12 @@ public class CourseManager {
 
     public Course getCourse(String courseID) {
 
-        Course course = this.courseMap.get(courseID);
-        Course copy = new Course(course);
-        return copy;
+        if (this.courseMap.containsKey(courseID)){
+            Course course = this.courseMap.get(courseID);
+            Course copy = new Course(course);
+            return copy;
+        }
+        return null;
     }
 
 
@@ -64,7 +67,12 @@ public void addCourse(Course c) {
 
     public void removeCourse(String courseId) {
 
-        courseMap.remove(courseId);
+        if (this.courseMap.containsKey(courseId)){
+            courseMap.remove(courseId);
+        }else{
+            System.out.println("Course Invalid");
+        }
+
 
     }
 

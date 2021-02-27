@@ -3,6 +3,8 @@ package dkit.oop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -86,8 +88,6 @@ public class App {
             String DOB = sc.next();
             System.out.println("Enter Password ->");
             String password = sc.next();
-            System.out.println("Enter Email ->");
-            String email = sc.next();
 
             if (mgr.login(caonumber, DOB, password)) {
                 loggedin = true;
@@ -143,17 +143,22 @@ public class App {
                         List<String> updatechoice = new ArrayList<>();
 
                         for (int i = 1; i <= num; i++) {
-                            System.out.print("Enter Choice "+i+": ");
+                            boolean val = false;
+                            while(!val){
+                                System.out.print("Enter Choice "+i+": ");
+                                String update = sc.next();
+                                if (mgr.getCourse(update)==null){
+                                    System.out.println("invalid Course");
+                                }else {
+                                    updatechoice.add(update);
+                                    val = true;
+                                }
+                            }
 
-                            String update = sc.next();
-                            updatechoice.add(update);
 
                         }
                         mgr.updateChoices(caonumber, updatechoice);
                         System.out.println("choices Updated");
-
-
-
                         break;
                     case 5:
                         System.out.println("logout");
@@ -231,16 +236,48 @@ public class App {
                         break;
                     case 5:
                         System.out.println("5. Add Student ");
-                        System.out.println("enter in CaoNumber");
-                        int cao = sc.nextInt();
-                        System.out.println("enter in Date of Birth");
-                        String DOB = sc.next();
-                        System.out.println("Enter in Password");
-                        String password = sc.next();
+                        int cao = 0;
+                        String DOB = "";
+                        String password = "";
+                        String email = "";
+
+                        boolean input = false;
+                        while(!input)
+                        {
+                            System.out.println("Enter in Your 5 Digit CaoNumber");
+                            cao = sc.nextInt();
+                            if (isValidCao(cao)) {
+
+                                input = true;
+                            }
+                        }
+                        input = false;
+                        while(!input){
+                            System.out.println("Enter in Date of Birth (YYYY-MM-DD)");
+                            DOB = sc.next();
+                            if (isValidDOB(DOB)) {
+
+                                input = true;
+                            }
+
+                        }
+                        input = false;
+                        while(!input){
+                            System.out.println("Enter in Password");
+                            System.out.println("Password (UpperCase, LowerCase and Number)");
+                            password = sc.next();
+                            if (isValidPassword(password)) {
+
+                                input = true;
+                            }
+
+                        }
+
                         System.out.println("Enter in Email Address");
-                        String email = sc.next();
+                        email = sc.next();
                         Student s = new Student(cao,DOB,password,email);
                         mgr.addstudent(s);
+
 
                         break;
                     case 6:
@@ -248,7 +285,7 @@ public class App {
                         System.out.println("Enter in CaoNumber");
                         int num = sc.nextInt();
                         mgr.removeStudent(num);
-                        System.out.println("Student "+num+" removed");
+
                         break;
                     case 7:
                         System.out.println("7. Display Student ");
@@ -270,11 +307,53 @@ public class App {
                         break;
                 }
             }
+    }
 
 
 
+    public static boolean isValidCao(int cao)
+    {
 
-        }
+        String regex = "[0-9]{5}";
+
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+        String cao1 = ""+cao;
+        Matcher m = p.matcher(cao1);
+
+
+        return m.matches();
+    }
+
+    public static boolean isValidDOB(String DOB)
+    {
+
+        String regex = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))";
+
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(DOB);
+
+
+        return m.matches();
+    }
+    public static boolean isValidPassword(String password)
+    {
+
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$";
+
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+
+        return m.matches();
+    }
 
 
 

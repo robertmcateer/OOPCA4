@@ -26,9 +26,12 @@ public class StudentManager {
 
     public Student getStudent(int caoNumber) {
 
-        Student student = this.studentMap.get(caoNumber);
-        Student copy = new Student(student);
-        return copy;
+        if(this.studentMap.containsKey(caoNumber)){
+            Student student = this.studentMap.get(caoNumber);
+            Student copy = new Student(student);
+            return copy;
+        }
+        return null;
     }
 
     public void addStudent(Student s) {
@@ -42,7 +45,12 @@ public class StudentManager {
 
     public void removeStudent(int caoNumber) {
 
-        studentMap.remove(caoNumber);
+        if(this.studentMap.containsKey(caoNumber)){
+            studentMap.remove(caoNumber);
+        }
+        else{
+            System.out.println("Invalid Student");
+        }
     }
 
     public boolean isRegistered(int caoNumber) {
