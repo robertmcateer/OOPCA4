@@ -26,7 +26,7 @@ public class CourseChoicesManager {
     private Map<String,Course> courseMap;
 
     // caoNumber, course selection list - for fast access
-    private Map <Integer, List<Course>> choicesMap;
+    private Map <Integer, List<String>> choicesMap;
 
 
 
@@ -43,20 +43,21 @@ public class CourseChoicesManager {
 
 
         List<Course> courses= courseManager.getAllCourses();
+        courseMap = new HashMap<>();
         for (Course c : courses)
         {
             Course copy = new Course(c);
             courseMap.put(copy.getCourseId(),copy);
         }
 
-        List<Course> choicelist = new ArrayList<>();
+        List<String> choicelist = new ArrayList<>();
         choicesMap = new HashMap<>();
         Student s = new Student(studentManager.getStudent(12345));
 
 
-        choicelist.add(new Course(courseManager.getCourse("DK555")));
-        choicelist.add(new Course(courseManager.getCourse("DK821")));
-        choicelist.add(new Course(courseManager.getCourse("DKIT1980")));
+        choicelist.add("DK555");
+        choicelist.add("DK821");
+        choicelist.add("DKIT1980");
 
         choicesMap.put(s.getCaoNumber(),choicelist);
 
@@ -86,20 +87,24 @@ public class CourseChoicesManager {
 
     public List<Course> getStudentChoices(int caonumber) {
 
-        List<Course> choicelist = choicesMap.get(caonumber);
-        return choicelist;
+        List<String> choicelist = new ArrayList<>();
+        List<Course> courselist = new ArrayList<>();
+
+        choicelist = choicesMap.get(caonumber);
+
+        for (String c:choicelist){
+            courselist.add(new Course(courseManager.getCourse(c)));
+        }
+
+        return courselist;
 
     }
 
     public void updateChoices(int caonumber,List<String> courseIDs ) {
 
-        List<Course> choicelist = getStudentChoices(caonumber);
-        for(int i =0; i < courseIDs.size(); i++){
-
-            Course choice = courseMap.get(courseIDs.get(i));
-            choicelist.add(new Course(choice));
+        if (studentManager.isRegistered(caonumber)){
+            choicesMap.put(caonumber,courseIDs);
         }
-        this.choicesMap.put(caonumber,choicelist);
 
 
     }
@@ -114,14 +119,75 @@ public class CourseChoicesManager {
 
         Student login = studentManager.getStudent(caonumber);
 
-        if (login.equals(studentManager.isRegistered(caonumber))){
+        if (caonumber == login.getCaoNumber() && dateOfBirth.equals(login.getDayOfBirth()) && password.equals(login.getPassword()))
+        {
+            System.out.println("log in Successful");
             verify = true;
         }
+
 
         return verify;
 
 
     }
+
+    public void addstudent (Student student){
+
+        if (student != null){
+            studentManager.addStudent(student);
+        }else
+        {
+            System.out.println("invalid input");
+        }
+    }
+    public void removeStudent (int caonum) {
+        studentManager.removeStudent(caonum);
+    }
+
+    public Student getStudent (int caonum) {
+
+        Student copy = null;
+        Student student = studentManager.getStudent(caonum);
+
+        if (student != null) {
+            copy = new Student(student);
+        }
+        return copy;
+
+    }
+
+    public Course getCourse (String courseid) {
+        Course copy = null;
+        Course course = courseManager.getCourse(courseid);
+
+        if (course != null) {
+            copy = new Course(course);
+        }
+        return copy;
+    }
+
+    public void addCourse (Course course){
+
+        if (course != null){
+            courseManager.addCourse(course);
+        }else
+        {
+            System.out.println("invalid input");
+        }
+    }
+
+    public void removeCourse(String courseid) {
+        courseManager.removeCourse(courseid);
+    }
+
+    public void getallCourses()
+    {
+        courseManager.getAllCourses();
+    }
+
+
+
+
 
 
 }

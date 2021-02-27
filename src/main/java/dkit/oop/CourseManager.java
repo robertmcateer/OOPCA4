@@ -1,10 +1,9 @@
 package dkit.oop;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * CoursesManager
@@ -18,30 +17,17 @@ import java.util.Set;
 
 public class CourseManager {
 
-    private Map<String,Course> courseMap;
+    private Map<String,Course> courseMap= new HashMap<>();
 
     public CourseManager() {
-        Course c1 = new Course("DK821","8"," BSC in Computing in Software Developemt","DKIT");
-        Course c2 = new Course("DK555","8"," BSC in Computing in Games Development","DKIT");
-        Course c4 = new Course("DKIT1900","8","Business Management","dkit");
-        Course c5 = new Course("DKIT1700","7","Business and Finance","dkit");
-        Course c6 = new Course("DKIT1980","8","Nursing","dkit");
-
-        this.courseMap = new HashMap<>();
-        courseMap.put(c1.getCourseId(),c1);
-        courseMap.put(c2.getCourseId(),c2);
+        loadcources();
 
     }
 
     public Course getCourse(String courseID) {
 
-        Course copy = null;
         Course course = this.courseMap.get(courseID);
-
-        if (course!= null)
-        {
-            copy = new Course(course);
-        }
+        Course copy = new Course(course);
         return copy;
     }
 
@@ -78,7 +64,38 @@ public void addCourse(Course c) {
 
     }
 
-    // editCourse(courseId);       // not required for this iteration
+    public void loadcources() {
+
+        try (Scanner sc = new Scanner(new File("cources.txt"));) {
+            sc.useDelimiter("[,\r\n]+");
+            while (sc.hasNext())
+            {
+
+                String courseid = sc.next();
+                String level = sc.next();
+                String title = sc.next();
+                String insitute = sc.next();
+
+                Course s = new Course(courseid,level,title,insitute);
+                Course s1 = new Course(s);
+
+                courseMap.put(s1.getCourseId(),s1);
+            }
+
+        }
+        catch (IOException e) {
+            System.out.println("IOException thrown in loadStudentsFromFile() "+e.getMessage());
+        }
+        catch (InputMismatchException exception)
+        {
+            System.out.println("InputMismatchexception caught." + exception);
+        }
+    }
+
+    public void wrtieout(){
+
+    }
+
 
 }
 
